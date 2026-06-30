@@ -21,7 +21,7 @@ public class TokenService {
         try{
             algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
-                    .withIssuer("login_auth_api")
+                    .withIssuer("qrcode_aps")
                     .withSubject(user.getEmail())
                     .withExpiresAt(generateExpirationDate())
                     .sign(algorithm);
@@ -35,7 +35,7 @@ public class TokenService {
         try {
             algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("login_auth_api")
+                    .withIssuer("qrcode_aps")
                     .build()
                     .verify(token)
                     .getSubject();

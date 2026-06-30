@@ -19,25 +19,46 @@ import java.util.Collections;
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
-    TokenService tokenService;
+    private UserRepository userRepository;
     @Autowired
-    UserRepository userRepository;
+    private TokenService tokenService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        var token = this.recoverToken(request);
-        var login = tokenService.validateToken(token);
 
-        if(login != null ){
-            User user = userRepository.findByEmail(login).orElseThrow(()->new RuntimeException("User not found."));
-            var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        String path = request.getServletPath();
+
+        if (path.startsWith("/oauth2") || path.startsWith("/login")) {
+            filterChain.doFilter(request, response);
+            return;
         }
-        filterChain.doFilter(request, response);
-    }
 
-    private String recoverToken(HttpServletRequest request) {
-        var authHeader = request.getHeader("Authorization");
+
+        var token  = this.recover(request);
+        if (token == null) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        var login = tokenService.validateToken(token);
+        if (login == null) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        var optionalUser = userRepository.findByEmail(login);
+        if (optionalUser.isEmpty()) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        User user = optionalUser.get();
+        var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
+        filterChain.doFilter(request,response);
+    }
+    private String recover(HttpServletRequest request){
+        var authHeader =  request.getHeader("Authorization");
         if(authHeader == null) return null;
         return authHeader.replace("Bearer ", "");
     }

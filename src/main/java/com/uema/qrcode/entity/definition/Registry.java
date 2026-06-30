@@ -4,28 +4,17 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "registros")
-@Getter
+
 @Setter
+@Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Embeddable
+@EqualsAndHashCode(of = "linkAwsS3")
 public class Registry {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private User usuario; // O ID do usuário que a provocou
-
-    @Column(nullable = false, length = 150)
-    private String acao;
-
-    @Column(name = "link_aws_s3", nullable = false, length = 512)
-    private String linkAwsS3; // O atributo link enviado para a AWS que resulta no QR Code
-
-    @Column(name = "data_registro", updatable = false)
+    @Column(name = "author_user_id")
+    private String userId; // O ID do usuário que a provocou
+    private String linkAwsS3;
     private LocalDateTime dataRegistro = LocalDateTime.now();
 }

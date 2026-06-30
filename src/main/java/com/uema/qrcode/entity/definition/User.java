@@ -1,47 +1,55 @@
 package com.uema.qrcode.entity.definition;
-
 import com.uema.qrcode.entity.definition.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-@Entity
-@Table(name = "usuarios")
-@Getter
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Consumer;
+
 @Setter
+@Getter
+@Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-
+@Table(name = "users")
+public class User implements UserDetails{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, length = 100)
-    private String nome;
-
-    @Column(nullable = false, length = 100)
-    private Role role;
-
-
-    @Column(nullable = false, unique = true, length = 100)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    private String id;
+    private String username;
+    private String password;
+    @Column(unique = true, nullable = false)
     private String email;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "registry",
+            joinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<Registry> registry;
 
-    @Column(nullable = false, length = 255)
-    private String senha;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "perfil_id", nullable = false)
-    private Perfil perfil;
+    public void deleteRegistry(Registry registry){
+        this.registry.remove(registry);
+    }
 
-    private Boolean ativo = true;
+    public void addRegistry(Registry registry){
+        this.registry.add(registry);
+    }
+    public void setProject(Registry registry, Consumer<Registry> consumer){
+        consumer.accept(registry);
+        this.registry.add(registry);
+    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return role.getAuthorities();
+    }
 
-    @Column(name = "data_criacao", updatable = false)
-    private LocalDateTime dataCriacao = LocalDateTime.now();
-
-    // Lista que representa o histórico de alterações associado ao usuário
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Registry> registros = new ArrayList<>();
 }

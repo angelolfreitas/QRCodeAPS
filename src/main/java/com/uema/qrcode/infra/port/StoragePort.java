@@ -7,4 +7,5 @@ package com.uema.qrcode.infra.port;
 /// Para mudar a implementação, basta trocar a anotação Component
 public interface StoragePort {
     String uploadFile(byte[] file, String fileName, String contentType);
+    void deleteFile(String fileUrl);
 }

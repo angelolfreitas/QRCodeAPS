@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 /// Implmementação de StoragePort, que será o ponto de entrada do endereço TCP-IP
 /// das interações do usuário com esta API.
@@ -58,5 +59,24 @@ public class StorageAdapter implements StoragePort {
         // por fim, acessamos o requerimento feito pelo request do primeiro parâmetro do cliente.
         String fileLocation = String.format("https://%s.s3.%s.amazonaws.com/%s", bucketName, region, fileName);
         return fileLocation;
+    }
+    @Override
+    public void deleteFile(String fileUrl) {
+        try {
+            // Extrai o nome do arquivo (Key) a partir do final da URL pública do S3
+            // Exemplo: https://bucket.s3.amazonaws.com/meu-qrcode-uuid -> meu-qrcode-uuid
+            String fileKey = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+
+            DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(fileKey)
+                    .build();
+
+            s3Client.deleteObject(deleteObjectRequest);
+            System.out.println("Arquivo deletado com sucesso do S3: " + fileKey);
+        } catch (Exception e) {
+            // Lança uma exceção ou faz um log caso a política do IAM barre a exclusão
+            throw new RuntimeException("Falha ao deletar arquivo físico no S3: " + e.getMessage());
+        }
     }
 }
