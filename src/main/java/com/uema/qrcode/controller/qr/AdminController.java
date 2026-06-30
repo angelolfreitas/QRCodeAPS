@@ -28,7 +28,7 @@ public class AdminController {
             @AuthenticationPrincipal User user){
 
         try {
-            QRCodeResponse response =  qrCodeService.registrateAndGenerateQRCode(request.text(), user);
+            QRCodeResponse response =  qrCodeService.registrateAndGenerateQRCode(request.text(), user, request.locationId());
             return  ResponseEntity.ok(response);
         } catch (WriterException | IOException ignored) {
             //erro interno: 500, pode ser causado tanto pela má formatação

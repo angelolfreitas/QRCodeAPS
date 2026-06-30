@@ -1,4 +1,4 @@
 package com.uema.qrcode.entity.dto.qr;
 
-public record QRCodeRequest(String text) {
+public record QRCodeRequest(String text, Integer locationId) {
 }

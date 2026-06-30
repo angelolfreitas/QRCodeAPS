@@ -17,4 +17,5 @@ public class Registry {
     private String userId; // O ID do usuário que a provocou
     private String linkAwsS3;
     private LocalDateTime dataRegistro = LocalDateTime.now();
+    private Integer locationId;
 }

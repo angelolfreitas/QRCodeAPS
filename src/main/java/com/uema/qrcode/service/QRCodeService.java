@@ -94,12 +94,13 @@ public class QRCodeService {
     }
 
     @Transactional
-    public QRCodeResponse registrateAndGenerateQRCode(String txt, User user) throws IOException, WriterException {
+    public QRCodeResponse registrateAndGenerateQRCode(String txt, User user, Integer locationId) throws IOException, WriterException {
         String awsUrl = uploadQRCode(txt);
 
         Registry registry = Registry.builder()
                 .linkAwsS3(awsUrl)
                 .userId(user.getId())
+                .locationId(locationId)
                 .build();
 
         User newUser = userRepository.findById(user.getId())
@@ -107,7 +108,7 @@ public class QRCodeService {
 
         newUser.addRegistry(registry);
 
-        return new QRCodeResponse(awsUrl);
+        return new QRCodeResponse(awsUrl, locationId);
     }
 
     private String uploadQRCode(String txt) throws WriterException, IOException {
