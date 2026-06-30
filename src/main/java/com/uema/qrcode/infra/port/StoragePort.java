@@ -1,4 +1,4 @@
-package com.uema.qrcode.port;
+package com.uema.qrcode.infra.port;
 /// Interface que abstrai as implementações de portas necesárias
 /// para as interações com o http.
 /// Isso é ótimo para a escalabilidade do projeto, pois podemos ter

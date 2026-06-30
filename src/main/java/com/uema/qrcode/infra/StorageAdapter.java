@@ -1,6 +1,6 @@
 package com.uema.qrcode.infra;
 
-import com.uema.qrcode.port.StoragePort;
+import com.uema.qrcode.infra.port.StoragePort;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.core.sync.RequestBody;

@@ -6,7 +6,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.uema.qrcode.entity.dto.QRCodeResponse;
-import com.uema.qrcode.port.StoragePort;
+import com.uema.qrcode.infra.port.StoragePort;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;

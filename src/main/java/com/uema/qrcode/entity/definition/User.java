@@ -1,5 +1,6 @@
 package com.uema.qrcode.entity.definition;
 
+import com.uema.qrcode.entity.definition.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -12,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,10 @@ public class Usuario {
 
     @Column(nullable = false, length = 100)
     private String nome;
+
+    @Column(nullable = false, length = 100)
+    private Role role;
+
 
     @Column(nullable = false, unique = true, length = 100)
     private String email;
@@ -38,5 +43,5 @@ public class Usuario {
 
     // Lista que representa o histórico de alterações associado ao usuário
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Registro> registros = new ArrayList<>();
+    private List<Registry> registros = new ArrayList<>();
 }
