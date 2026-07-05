@@ -28,11 +28,8 @@ public class User implements UserDetails{
     private Role role;
     private String equipe;
     private String crea;
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(
-            name = "registry",
-            joinColumns = @JoinColumn(name = "user_id")
-    )
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id") 
     private Set<Inspecao> registry;
 
 

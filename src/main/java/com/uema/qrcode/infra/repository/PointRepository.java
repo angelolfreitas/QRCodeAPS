@@ -10,9 +10,9 @@ import java.util.Optional;
 public interface PointRepository extends JpaRepository<Point, String> {
     Optional<Point> findByCodigo(String codigo);
 
-    @Query("SELECT COUNT(p) FROM Point p WHERE p.status = 'VERIFICADO'")
+    @Query("SELECT COUNT(p) FROM Point p WHERE p.status = 'INSPECIONADO'")
     Long countVerificados();
 
-    @Query("SELECT COUNT(p) FROM Point p WHERE p.status != 'VERIFICADO'")
+    @Query("SELECT COUNT(p) FROM Point p WHERE p.status != 'INSPECIONADO'")
     Long countUnverificados();
 }

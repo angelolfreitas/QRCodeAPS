@@ -16,11 +16,17 @@ public class AdminComponent {
 
     @Bean
     public CommandLineRunner initAdmin(AuthenticationService authentication) {
-        return args ->
-                authentication.register(
-                        RegisterRequest.noRole("admin", adminEmail, adminPassword, "", ""),
-                        Role.ADMIN
-                );
+       return args -> {
+           try {
+               authentication.register(
+                       RegisterRequest.noRole("admin", adminEmail, adminPassword, "", ""),
+                       Role.ADMIN
+               );
+               System.out.println("Admin user initialized successfully.");
+           } catch (Exception e) {
+               System.out.println("Admin initialization skipped or failed: " + e.getMessage());
+           }
+       };
 
     }
 }
