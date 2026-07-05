@@ -110,7 +110,7 @@ public class AuthenticationService {
         Optional<List<User>> optUsers = userRepository.findByRole(role);
         List<User> users = optUsers.orElse(List.of());
         return users.stream()
-                .map(u->new UserResume(u.getId(), u.getUsername(), u.getEquipe(), u.getCrea()))
+                .map(u->new UserResume(u.getId(), u.getUsername(), u.getEquipe(), u.getCrea(), u.getEmail()))
                 .toList();
     }
 }

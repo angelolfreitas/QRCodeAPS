@@ -61,10 +61,12 @@ public class AdminController {
     }
 
     @PostMapping("/sign-up")
-    ResponseEntity<RegisterResponse> signUp(@RequestBody RegisterRequest registerRequest, Role role) {
+    ResponseEntity<RegisterResponse> signUp(@RequestBody RegisterRequest registerRequest) {
         Optional<RegisterResponse> registerResponse = authenticationService.register(registerRequest,
-                role);
+                registerRequest.role());
         return registerResponse.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
+
+
 }

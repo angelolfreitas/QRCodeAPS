@@ -158,4 +158,15 @@ public class PointService {
                 point.getTipoPontoId()
         );
     }
+
+    public Long getTotalPoints(){
+        return pointRepository.count();
+    }
+
+    public Long getVerifiedPoints(){
+        return pointRepository.countVerificados();
+    }
+    public Long getUnverifiedPoints(){
+        return pointRepository.countUnverificados();
+    }
 }
