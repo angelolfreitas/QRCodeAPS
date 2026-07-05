@@ -111,7 +111,7 @@ public class QRCodeService {
         return new QRCodeResponse(awsUrl, locationId);
     }
 
-    private String uploadQRCode(String txt) throws WriterException, IOException {
+    public String uploadQRCode(String txt) throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(txt, BarcodeFormat.QR_CODE, 200, 200);
         ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();

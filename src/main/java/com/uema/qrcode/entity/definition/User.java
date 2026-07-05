@@ -28,6 +28,8 @@ public class User implements UserDetails{
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
+    private String equipe;
+    private String crea;
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
             name = "registry",
@@ -41,10 +43,6 @@ public class User implements UserDetails{
     }
 
     public void addRegistry(Registry registry){
-        this.registry.add(registry);
-    }
-    public void setProject(Registry registry, Consumer<Registry> consumer){
-        consumer.accept(registry);
         this.registry.add(registry);
     }
     @Override

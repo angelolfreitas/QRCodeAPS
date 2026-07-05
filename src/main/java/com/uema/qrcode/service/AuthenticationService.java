@@ -50,6 +50,8 @@ public class AuthenticationService {
                 .email(register.email())
                 .username(register.name())
                 .role(role)
+                .crea(register.crea())
+                .equipe(register.equipe())
                 .build();
 
         this.userRepository.save(user);
