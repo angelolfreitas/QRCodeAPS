@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem('spda_token');
     const role = localStorage.getItem('spda_role');
-
+    const username = localStorage.getItem('spda_username');
     // 1. Verifica se está logado
     if (!token) {
         alert("Você precisa estar logado para acessar o painel!");
@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Acesso Negado! Apenas administradores podem acessar esta página.");
         window.location.href = "../login/login.html";
         return;
+    }
+
+    if (username) {
+        document.getElementById('nomeAdministrador').innerText = username;
     }
 
     carregarIndicadores(token); // ou atualizarTabelas(); no caso do config.js

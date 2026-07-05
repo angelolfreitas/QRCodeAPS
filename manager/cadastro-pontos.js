@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('formCadastroPontoCompleto').addEventListener('submit', cadastrarPonto);
 });
 async function carregarSelects() {
-    await preencherSelect('clientes', 'pontoSelectCliente', 'Selecione o cliente');
     await preencherUsuarios();
 }
 
@@ -45,7 +44,7 @@ async function preencherUsuarios() {
         usuarios.forEach(usuario => {
             const option = document.createElement('option');
             option.value = usuario.id;
-            option.textContent = `${usuario.username} - ${usuario.equipe || 'Sem equipe'}`;
+            option.textContent = `${usuario.username} - ${usuario.email}`;
             select.appendChild(option);
         });
     } catch (erro) {
@@ -83,12 +82,11 @@ async function cadastrarPonto(evento) {
     evento.preventDefault();
 
     const corpo = {
-        clienteId: document.getElementById('pontoSelectCliente').value,
+        responsavelId: document.getElementById('pontoSelectResponsavel').value,
         areaId: document.getElementById('pontoArea').value,
         localizacao: document.getElementById('pontoLocalizacao').value,
         criticidade: document.getElementById('pontoCriticidade').value,
-        descricao: document.getElementById('pontoDescricao').value,
-        responsavelId: document.getElementById('pontoSelectResponsavel').value   // NOVO
+        descricao: document.getElementById('pontoDescricao').value
     };
 
     try {

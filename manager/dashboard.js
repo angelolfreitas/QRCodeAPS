@@ -1,47 +1,61 @@
-const API_BASE_URL = "http://localhost:8080";
-
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem('spda_token');
     const role = localStorage.getItem('spda_role');
-
     // 1. Verifica se está logado
     if (!token) {
-        alert("Sessão expirada. Faça login novamente.");
+        alert("Você precisa estar logado para acessar o painel!");
         window.location.href = "../login/login.html";
         return;
     }
 
-    // 2. Trava de Segurança: Aceita MANAGER ou ADMIN
-    if (role !== 'MANAGER' && role !== 'ADMIN') {
-        alert("Acesso Negado! Você não tem permissão de Gestor.");
+    // 2. Verifica se é ADMIN
+    if (role !== 'MANAGER') {
+        alert("Acesso Negado! Apenas administradores podem acessar esta página.");
         window.location.href = "../login/login.html";
         return;
     }
 
-    // Se passou pelas travas, carrega os dados
-    carregarIndicadores(token);
+    
+    carregarIndicadores(token); // ou atualizarTabelas(); no caso do config.js
 });
 
 async function carregarIndicadores(token) {
     try {
-        const resposta = await fetch(`${API_BASE_URL}/api/dashboard`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
+        const headers = { 'Authorization': `Bearer ${token}` };
 
-        if (!resposta.ok) throw new Error('Falha ao carregar indicadores');
+        // Dispara as três requisições simultaneamente para otimizar o tempo de resposta
+        const [respTotal, respVerificados, respNaoVerificados] = await Promise.all([
+            fetch(`${API_BASE_URL}/resume/count/points`, { headers }),
+            fetch(`${API_BASE_URL}/resume/count/points/verificados`, { headers }),
+            fetch(`${API_BASE_URL}/resume/count/points/nao-verificados`, { headers })
+        ]);
 
-        const dados = await resposta.json();
+        // Verifica se alguma das rotas foi bloqueada (ex: erro 403 de permissão) ou falhou
+        if (!respTotal.ok || !respVerificados.ok || !respNaoVerificados.ok) {
+            throw new Error('Falha ao buscar os indicadores de resume. Verifique as permissões.');
+        }
 
-        document.getElementById('ind-cadastrados').innerText = dados.totalPontos || 0;
-        document.getElementById('ind-conformes').innerText = dados.totalConformes || 0;
-        document.getElementById('ind-nao-conformes').innerText = dados.totalNaoConformes || 0;
+        // Como o Spring retorna um número direto (Long), o .json() converte perfeitamente
+        const total = await respTotal.json();
+        const verificados = await respVerificados.json();
+        const naoVerificados = await respNaoVerificados.json();
 
-        renderizarGrafico(dados.totalConformes || 0, dados.totalNaoConformes || 0);
+        // Injeta os valores no HTML
+        document.getElementById('ind-cadastrados').innerText = total;
+        document.getElementById('ind-conformes').innerText = verificados;
+        document.getElementById('ind-nao-conformes').innerText = naoVerificados;
+
+        // Atualiza o gráfico do Chart.js
+        renderizarGrafico(verificados, naoVerificados);
+
     } catch (erro) {
-        console.error("Erro no dashboard:", erro);
+        console.error("Erro ao carregar dashboard:", erro);
+        // Em caso de erro, coloca o "-" para não desconfigurar o visual
+        document.getElementById('ind-cadastrados').innerText = "-";
+        document.getElementById('ind-conformes').innerText = "-";
+        document.getElementById('ind-nao-conformes').innerText = "-";
     }
 }
-
 function renderizarGrafico(conformes, naoConformes) {
     const ctx = document.getElementById('graficoConformidade');
     if (!ctx || typeof Chart === 'undefined') return;
@@ -51,14 +65,15 @@ function renderizarGrafico(conformes, naoConformes) {
         data: {
             labels: ['Conformes', 'Não Conformes'],
             datasets: [{
-                label: 'Status dos Pontos',
+                label: 'Pontos por situação de conformidade',
                 data: [conformes, naoConformes],
                 backgroundColor: ['#2ecc71', '#e74c3c']
             }]
         },
         options: {
             responsive: true,
-            plugins: { legend: { display: false } }
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
         }
     });
 }
