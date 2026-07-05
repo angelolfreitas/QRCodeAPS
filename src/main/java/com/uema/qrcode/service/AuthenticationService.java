@@ -1,20 +1,20 @@
 package com.uema.qrcode.service;
 import com.uema.qrcode.entity.definition.User;
 import com.uema.qrcode.entity.definition.role.Role;
-import com.uema.qrcode.entity.dto.user.LoginRequest;
-import com.uema.qrcode.entity.dto.user.LoginResponse;
-import com.uema.qrcode.entity.dto.user.RegisterRequest;
-import com.uema.qrcode.entity.dto.user.RegisterResponse;
+import com.uema.qrcode.entity.dto.user.*;
 import com.uema.qrcode.infra.repository.UserRepository;
 import com.uema.qrcode.infra.security.TokenService;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -31,7 +31,7 @@ public class AuthenticationService {
                         ()->new RuntimeException(login.email()
                         ));
         if(!passwordEncoder.matches(login.password(), user.getPassword()))
-            throw new RuntimeException("senha1 "+login.password()+" senha 2 "+user.getPassword());
+            throw new RuntimeException();
 
         String token = tokenService.generateToken(user);
 
@@ -104,6 +104,14 @@ public class AuthenticationService {
             ReflectionUtils.setField(field, user, value);
         });
         this.userRepository.save(user);
+    }
+
+    public List<UserResume> listarPorRole(Role role) {
+        Optional<List<User>> optUsers = userRepository.findByRole(role);
+        List<User> users = optUsers.orElse(List.of());
+        return users.stream()
+                .map(u->new UserResume(u.getId(), u.getUsername(), u.getEquipe(), u.getCrea()))
+                .toList();
     }
 }
 

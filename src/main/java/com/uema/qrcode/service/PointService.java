@@ -1,11 +1,14 @@
 package com.uema.qrcode.service;
 
 import com.uema.qrcode.entity.definition.Point;
+import com.uema.qrcode.entity.dto.inspecao.InspecaoResponse;
 import com.uema.qrcode.entity.dto.ponto.RegisterRequest;
 import com.uema.qrcode.entity.dto.ponto.RegisterResponse;
+import com.uema.qrcode.infra.repository.InspecaoRepository;
 import com.uema.qrcode.infra.repository.PointRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -22,10 +25,45 @@ public class PointService {
     private final PointRepository pointRepository;
     private final QRCodeService qrCodeService;
 
-    @org.springframework.beans.factory.annotation.Value("${app.base-url}")
+    @Value("${app.base-url}")
     private String baseUrl;
 
-    public Optional<List<Point>> points(){
+    private final InspecaoRepository inspecaoRepository; // adicionar junto dos outros campos "private final"
+
+    public Optional<InspecaoResponse> getByCodigo(String codigo) {
+        Optional<Point> pointOpt = findByCodigo(codigo);
+        if (pointOpt.isEmpty()) return Optional.empty();
+        Point point = pointOpt.get();
+
+        List<InspecaoResponse.InspecaoHistoricoItem> historico = inspecaoRepository
+                .findByPontoIdOrderByDataInspecaoDesc(point.getId())
+                .stream()
+                .map(i -> new InspecaoResponse.InspecaoHistoricoItem(
+                        i.getDataInspecao().toString(),
+                        i.getResponsavel(),
+                        i.getConforme(),
+                        i.getResistenciaAterramento(),
+                        i.getContinuidadeEletrica(),
+                        i.getCondicaoVisual(),
+                        i.getObservacoes(),
+                        i.getPdfUrl()
+                ))
+                .toList();
+
+        return Optional.of(new InspecaoResponse(
+                point.getCodigo(),
+                point.getClienteId(),
+                point.getAreaId(),
+                point.getTipoPontoId(),
+                point.getLocalizacao(),
+                point.getDescricao(),
+                point.getCriticidade(),
+                point.getStatus(),
+                historico
+        ));
+    }
+
+    public Optional<List<Point>> points() {
         return Optional.of(pointRepository.findAll());
     }
 
@@ -33,13 +71,14 @@ public class PointService {
         return pointRepository.findByCodigo(codigo);
     }
 
+
+
     @Transactional
     public void deletePoint(String id) {
-        if (pointRepository.existsById(id)) {
-            pointRepository.deleteById(id);
-        } else {
+        if (!pointRepository.existsById(id)) {
             throw new RuntimeException("Ponto não encontrado com o ID: " + id);
         }
+        pointRepository.deleteById(id);
     }
 
     @Transactional
@@ -53,8 +92,7 @@ public class PointService {
         point.setAreaId(register.areaId());
         point.setTipoPontoId(point.getId());
 
-        this.pointRepository.save(point);
-
+        pointRepository.save(point);
         return toResponse(point);
     }
 
@@ -67,33 +105,43 @@ public class PointService {
                 ReflectionUtils.setField(field, point, value);
             }
         });
-        this.pointRepository.save(point);
+        pointRepository.save(point);
     }
 
     @Transactional
     public RegisterResponse cadastrarPonto(RegisterRequest register) throws Exception {
         Point point = Point.builder()
-                .codigo(register.codigo() != null ? register.codigo() : "PT-" + UUID.randomUUID().toString().substring(0, 6).toUpperCase())
+                .codigo(register.codigo() != null ? register.codigo() : gerarCodigo())
                 .localizacao(register.localizacao())
                 .descricao(register.descricao())
                 .criticidade(register.criticidade())
                 .status(register.status() != null ? register.status() : "ATIVO")
                 .clienteId(register.clienteId())
                 .areaId(register.areaId())
+                .responsavelId(register.responsavelId())
                 .build();
 
-        this.pointRepository.save(point); // gera o id
-
+        pointRepository.save(point); // gera o id
         point.setTipoPontoId(point.getId());
 
-        // Gera o QR Code apontando pra ficha desse ponto e sobe pro S3
+        // QR provisório: resolve pra ficha (sem laudo ainda) ou pro último PDF (após inspeção)
         String urlResolucao = baseUrl + "/api/pontos/codigo/" + point.getCodigo() + "/redirect";
-        String qrCodeUrl = qrCodeService.uploadQRCode(urlResolucao);
-        point.setQrCodeUrl(qrCodeUrl);
+        point.setQrCodeUrl(qrCodeService.uploadQRCode(urlResolucao));
 
-        this.pointRepository.save(point);
-
+        pointRepository.save(point);
         return toResponse(point);
+    }
+
+    @Transactional
+    public void atualizarAposInspecao(Point point, String urlPdf, String novoQrCodeUrl) {
+        point.setUltimoPdfUrl(urlPdf);
+        point.setStatus("INSPECIONADO");
+        point.setQrCodeUrl(novoQrCodeUrl);
+        pointRepository.save(point);
+    }
+
+    private String gerarCodigo() {
+        return "PT-" + UUID.randomUUID().toString().substring(0, 6).toUpperCase();
     }
 
     private RegisterResponse toResponse(Point point) {
@@ -109,10 +157,5 @@ public class PointService {
                 point.getAreaId(),
                 point.getTipoPontoId()
         );
-    }
-
-    @Transactional
-    public void updateStatusPdf(Point point) {
-        this.pointRepository.save(point);
     }
 }

@@ -7,6 +7,7 @@ public record RegisterRequest(
         String criticidade,
         String status,
         String clienteId,
-        String areaId
+        String areaId,
+        String responsavelId
 ) {
 }

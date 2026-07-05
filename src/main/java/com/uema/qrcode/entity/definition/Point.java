@@ -49,4 +49,7 @@ public class Point {
 
     @Column(name = "ultimo_pdf_url")
     private String ultimoPdfUrl;
+
+    @Column(name = "responsavel_id")
+    private String responsavelId;
 }

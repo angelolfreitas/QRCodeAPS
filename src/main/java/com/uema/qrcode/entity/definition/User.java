@@ -6,9 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Consumer;
 
 @Setter
 @Getter
@@ -35,14 +33,14 @@ public class User implements UserDetails{
             name = "registry",
             joinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<Registry> registry;
+    private Set<Inspecao> registry;
 
 
-    public void deleteRegistry(Registry registry){
+    public void deleteRegistry(Inspecao registry){
         this.registry.remove(registry);
     }
 
-    public void addRegistry(Registry registry){
+    public void addRegistry(Inspecao registry){
         this.registry.add(registry);
     }
     @Override

@@ -1,7 +1,6 @@
 package com.uema.qrcode.controller.qr;
 
 import com.google.zxing.WriterException;
-import com.uema.qrcode.entity.definition.Registry;
 import com.uema.qrcode.entity.definition.User;
 import com.uema.qrcode.entity.dto.qr.QRCodeRequest;
 import com.uema.qrcode.entity.dto.qr.QRCodeResponse;

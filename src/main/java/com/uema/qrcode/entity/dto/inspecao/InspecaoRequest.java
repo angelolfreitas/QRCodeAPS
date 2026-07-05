@@ -1,4 +1,4 @@
-package com.uema.qrcode.entity.dto.ponto;
+package com.uema.qrcode.entity.dto.inspecao;
 
 public record InspecaoRequest(
         String responsavel,

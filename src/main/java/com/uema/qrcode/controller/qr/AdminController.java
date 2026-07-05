@@ -2,8 +2,12 @@ package com.uema.qrcode.controller.qr;
 
 import com.google.zxing.WriterException;
 import com.uema.qrcode.entity.definition.User;
+import com.uema.qrcode.entity.definition.role.Role;
 import com.uema.qrcode.entity.dto.qr.QRCodeRequest;
 import com.uema.qrcode.entity.dto.qr.QRCodeResponse;
+import com.uema.qrcode.entity.dto.user.RegisterRequest;
+import com.uema.qrcode.entity.dto.user.RegisterResponse;
+import com.uema.qrcode.service.AuthenticationService;
 import com.uema.qrcode.service.QRCodeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -20,7 +25,9 @@ import java.io.IOException;
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
-    QRCodeService qrCodeService;
+    private QRCodeService qrCodeService;
+
+    private AuthenticationService authenticationService;
 
     @PostMapping
     public ResponseEntity<QRCodeResponse> qrcodeRequest(
@@ -51,5 +58,13 @@ public class AdminController {
     public ResponseEntity<Void> deleteAllRegistries() {
         qrCodeService.adminDeleteAllRegistries();
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/sign-up")
+    ResponseEntity<RegisterResponse> signUp(@RequestBody RegisterRequest registerRequest, Role role) {
+        Optional<RegisterResponse> registerResponse = authenticationService.register(registerRequest,
+                role);
+        return registerResponse.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 }
