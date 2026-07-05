@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLab - Inspeção de Campo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="inspecao.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <header class="app-header">
+            <div class="logo-min">⚡ SmartLab</div>
+            <div class="badge-perfil">Inspetor</div>
+        </header>
+
+        <main class="app-content">
+            
+            <!-- TELA 1: FICHA DIGITAL DO PONTO -->
+            <section id="telaFicha" class="card-inspecao">
+                <div class="ponto-header">
+                    <span id="badgeCriticidade" class="criticidade alta">Criticidade...</span>
+                    <h2 id="codigoPonto">Carregando...</h2>
+                    <p class="sub-status">Status: <strong id="statusPonto">...</strong></p>
+                </div>
+
+                <div class="detalhes-grupo">
+                    <h3>Detalhes do Ponto</h3>
+                    <div class="grid-detalhes">
+                        <div class="item-detalhe"><strong>Cliente:</strong> <span id="pontoCliente">...</span></div>
+                        <div class="item-detalhe"><strong>Área:</strong> <span id="pontoArea">...</span></div>
+                        <div class="item-detalhe"><strong>Tipo:</strong> <span id="pontoTipo">...</span></div>
+                        <div class="item-detalhe"><strong>Localização:</strong> <span id="pontoLocalizacao">...</span></div>
+                    </div>
+                    <p class="descricao-ponto"><strong>Descrição:</strong> <span id="pontoDescricao">...</span></p>
+                </div>
+
+                <div class="historico-grupo">
+                    <h3>Histórico de Inspeções</h3>
+                    <div id="containerHistorico" class="linha-tempo">
+                        <p class="msg-vazio">Nenhum registro encontrado para este ponto.</p>
+                    </div>
+                </div>
+
+                <button class="btn-principal" onclick="alternarTelas('formulario')">
+                    Registrar Nova Inspeção
+                </button>
+            </section>
+
+            <!-- TELA 2: FORMULÁRIO DE NOVA INSPEÇÃO -->
+            <section id="telaFormulario" class="card-inspecao" style="display: none;">
+                <div class="form-header-voltar">
+                    <button class="btn-voltar" onclick="alternarTelas('ficha')">← Voltar para a Ficha</button>
+                    <h2>Nova Inspeção</h2>
+                </div>
+
+                <form id="formularioInspecao">
+                    
+                    <div class="campo-grupo">
+                        <label for="formResponsavel">Responsável pela Inspeção:</label>
+                        <input type="text" id="formResponsavel" placeholder="Ex: Equipe 01" required>
+                    </div>
+
+                    <div class="campo-grupo-row">
+                        <div class="campo-grupo">
+                            <label for="formResistencia">Resistência (Ω):</label>
+                            <input type="number" id="formResistencia" step="0.1" placeholder="Ex: 4.8" required>
+                        </div>
+                        <div class="campo-grupo">
+                            <label for="formContinuidade">Continuidade (mΩ):</label>
+                            <input type="number" id="formContinuidade" step="1" placeholder="Ex: 38" required>
+                        </div>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="formCondicao">Condição Visual:</label>
+                        <select id="formCondicao" required>
+                            <option value="boa">Boa</option>
+                            <option value="regular">Regular</option>
+                            <option value="ruim">Ruim</option>
+                        </select>
+                    </div>
+
+                    <div class="campo-grupo-row checkboxes">
+                        <label class="chk-label">
+                            <input type="checkbox" id="formOxidacao"> Possui Oxidação?
+                        </label>
+                        <label class="chk-label">
+                            <input type="checkbox" id="formCorrecao"> Necessita Correção?
+                        </label>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="formConformidade">Situação de Conformidade:</label>
+                        <select id="formConformidade" class="select-conformidade" required>
+                            <option value="true">Conforme (Dentro do Padrão)</option>
+                            <option value="false">Não Conforme (Alerta / Falha)</option>
+                        </select>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="formFoto">Foto de Evidência (Campo):</label>
+                        <input type="file" id="formFoto" accept="image/*" class="input-file">
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="formObservacoes">Observações Técnicas:</label>
+                        <textarea id="formObservacoes" rows="3" placeholder="Digite anotações adicionais do local..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-principal salvar">Salvar Registro</button>
+                </form>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="../config.js"></script>
+    <script src="inspecao.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    
+</body>
+</html>

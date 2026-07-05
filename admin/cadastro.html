@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Membro - SPDA SmartLab</title>
+    <link rel="stylesheet" href="../cadastro/cadastro.css">
+</head>
+<body>
+<div class="container">
+    <header id="headerCadastro">
+        <h2>Cadastrar Novo Membro</h2>
+        <span style="background: #e74c3c; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8em;">Acesso Restrito</span>
+    </header>
+
+    <form id="form-cadastro">
+
+        <input type="text" id="nome-cadastro" placeholder="Nome Completo" required>
+        <input type="email" id="email-cadastro" placeholder="E-mail" required>
+        <input type="password" id="senha-cadastro" placeholder="Senha Temporária" required>
+
+        <label for="perfil-cadastro" style="font-size: 0.85em; color: #666;">Nível de Acesso (Role):</label>
+        <select id="perfil-cadastro" required>
+            <option value="" disabled selected>Selecione a permissão</option>
+            <option value="ADMIN">Administrador</option>
+            <option value="MANAGER">Manager</option>
+            <option value="USER">Usuário (Inspetor de Campo)</option>
+        </select>
+
+        <input type="text" id="equipe-cadastro" placeholder="Equipe / Setor" required>
+
+        <div id="bloco-crea" style="display: none; width: 100%;">
+            <label for="crea-cadastro" style="font-size: 0.85em; color: #666; display: block; margin-bottom: 4px;">Registro Profissional (Opcional):</label>
+            <input type="text" id="crea-cadastro" placeholder="CREA / CFT">
+        </div>
+
+        <button type="submit" id="btn-cadastrar">Criar Conta</button>
+
+    </form>
+    <p style="margin-top: 15px; font-size: 0.9em; text-align: center;">
+        <a href="dashboard.html" style="color: #666;">← Voltar ao Dashboard</a>
+    </p>
+
+</div>
+
+<script src="../config.js"></script>
+<script src="cadastro.js"></script>
+</body>
+</html>

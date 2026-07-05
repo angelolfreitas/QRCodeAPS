@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="login.css" />
+</head>
+
+<body>
+    <div class="login">
+        <div class="login-esq">
+            <div>
+                <div class="logo">
+                    <div class="logo-container">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-texto">SmartLab</span>
+                    </div>
+                </div>
+                <h2>Rastreabilidade industrial</h2>
+                <p class="texto-logo">Sistema para inspeção de pontos de SPDA</p>
+
+            </div>
+            <div class="footer">SmartLab 2026 - Grupo 2</div>
+        </div>
+
+        <div class="login-dir">
+
+            <div class="cabecalho">
+                <h3>Bem-Vindo</h3>
+                <p>Faça login para acessar o sistema</p>
+            </div>
+
+            <form id="loginFormulario">
+                <div class="campos">
+                    <label>E-mail:</label>
+                    <input id="email" placeholder="usuario@email.com">
+                    <span class="msg">Digite o seu E-mail</span>
+                </div>
+
+                <div class="campos">
+                    <label>Senha:</label>
+                    <div class="camp-senha">
+                        <input type="password" id="senha" placeholder="********">
+                        <button type="button" class="alternar" id="alternar-mostrar">
+                            <!--Inserir imagem de olho para alternar em ver ou não-->
+                        </button>
+                    </div>
+                    <span class="msg">Mínimo de 8 caracteres</span>
+                </div>
+
+                <div class="opcoes">
+                    <label>
+                        <input type="checkbox" id="Lembrar" />Lembrar-me
+                    </label>
+                    <a href="">Esqueceu a senha?</a>
+                </div>
+
+                <button type="submit" class="btn" id="btnLogin">
+                    <span>Entrar</span>
+                </button>
+
+            </form>
+
+            <div class="footer-fim">
+                <p style="margin-top: 15px; font-size: 0.9em;">
+                Não tem uma conta?<a href="../cadastro/cadastro.html"> Inscrever-se</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <script src="../config.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

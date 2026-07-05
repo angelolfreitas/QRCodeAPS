@@ -1,0 +1,214 @@
+:root {
+    --primaria: #6C2BD9;
+    --secundaria: #4A1A9E;
+    --primaria-escuro: #F28705;
+    --escuro: #1E1E2A;
+    --branco: #FFFFFF;
+    --cinza: #F5F5F5;
+    --cinza-bordas: #E0E0E0;
+    --cinza-texto: #666666;
+    --sombreado: 0 2px 16px rgba(0, 0, 0, 0.06);
+    --radius: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cinza);
+}
+
+/* Card Central de Cadastro */
+.container {
+    width: 440px;
+    max-width: 94%;
+    background: var(--branco);
+    border-radius: var(--radius);
+    padding: 0 0 40px 0;
+    box-shadow: var(--sombreado);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* O Header Escuro Colado no Topo */
+#headerCadastro {
+    width: 100%;
+    background-color: #1E1E2A;
+    padding: 30px 32px;
+    margin-bottom: 24px;
+}
+
+#headerCadastro h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--branco);
+    text-align: center;
+    margin: 0;
+}
+
+.container label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--escuro);
+    margin-bottom: 4px;
+    text-align: left;
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+.container input {
+    width: calc(100% - 64px);
+    margin-left: 32px;
+    margin-right: 32px;
+    padding: 11px 14px;
+    border: 1.5px solid var(--cinza-bordas);
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    transition: 0.2s;
+    background: var(--cinza);
+    margin-bottom: 14px;
+}
+
+.container input:focus {
+    outline: none;
+    border-color: var(--primaria);
+    background: var(--branco);
+}
+
+.container select {
+    width: calc(100% - 64px);
+    margin-left: 32px;
+    margin-right: 32px;
+    padding: 11px 14px;
+    border: 1.5px solid var(--cinza-bordas);
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    transition: 0.2s;
+    background: var(--cinza);
+    color: var(--escuro);
+    margin-bottom: 14px;
+    cursor: pointer;
+}
+
+.container select:focus {
+    outline: none;
+    border-color: var(--primaria);
+    background: var(--branco);
+}
+
+#bloco-crea {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#bloco-crea label {
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+#bloco-crea input {
+    width: calc(100% - 64px);
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+#btn-cadastrar {
+    width: calc(100% - 64px);
+    margin-left: 32px;
+    margin-right: 32px;
+    padding: 12px;
+    background: var(--primaria);
+    color: var(--branco);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#btn-cadastrar:hover {
+    background: var(--secundaria);
+}
+
+.container p {
+    text-align: center;
+    color: var(--cinza-texto);
+    font-family: 'Inter', sans-serif;
+    margin-top: 15px;
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+.container p a {
+    color: var(--primaria) !important;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.container p a:hover {
+    text-decoration: underline;
+}
+
+/* --- REVISADO: RESPONSIVIDADE PARA TELAS PEQUENAS --- */
+@media (max-width: 480px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+        padding: 16px 0;
+        overflow-y: auto;
+    }
+
+    .container {
+        width: 92%;
+        padding-bottom: 28px;
+    }
+
+    #headerCadastro {
+        padding: 24px 20px;
+        margin-bottom: 20px;
+    }
+    
+    #headerCadastro h2 {
+        font-size: 20px;
+    }
+
+    .container label {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .container input,
+    .container select,
+    #btn-cadastrar,
+    #bloco-crea input {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 12px;
+    }
+    
+    #bloco-crea label {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}

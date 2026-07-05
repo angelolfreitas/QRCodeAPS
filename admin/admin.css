@@ -1,0 +1,355 @@
+:root {
+    --primaria: #6C2BD9;
+    --secundaria: #4A1A9E;
+    --destaque-laranja: #F28705;
+    --escuro: #1E1E2A;
+    --fundo-pagina: #F8F9FA;
+    --branco: #FFFFFF;
+    --cinza-bordas: #E5E7EB;
+    --cinza-texto: #4B5563;
+    --sombreado: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --radius: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--fundo-pagina);
+    color: var(--escuro);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.painel-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* --- MENU LATERAL (SIDEBAR) --- */
+.sidebar {
+    width: 260px;
+    background: var(--escuro);
+    color: var(--branco);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.logo-icon {
+    font-size: 20px;
+    background: var(--destaque-laranja);
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: var(--escuro);
+    font-weight: bold;
+}
+
+.logo-texto {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.user-info {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: var(--radius);
+    margin-bottom: 30px;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.badge-role {
+    font-size: 11px;
+    color: var(--destaque-laranja);
+    font-weight: 500;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: #A0A0B0;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: 0.2s;
+    text-decoration: none;
+    display: block;
+}
+
+.menu-btn:hover, .menu-btn.active {
+    background: var(--primaria);
+    color: var(--branco);
+}
+
+.btn-sair {
+    color: #EF4444;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* --- CONTEÚDO PRINCIPAL (CENTRALIZADO) --- */
+.conteudo-principal {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.topo-pagina, 
+.grid-indicadores, 
+.card-grafico, 
+.grid-configuracoes, 
+.bloco-cadastro-ponto,
+.container-tabela-admin {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 32px auto;
+}
+
+.bloco-cadastro-ponto {
+    margin-bottom: 32px;
+}
+
+.topo-pagina h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.topo-pagina p {
+    font-size: 14px;
+    color: var(--cinza-texto);
+}
+
+/* --- INTERFACES: DASHBOARD --- */
+.grid-indicadores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card-indicador {
+    background: var(--branco);
+    padding: 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--sombreado);
+    border-top: 4px solid var(--primaria);
+}
+
+.card-indicador.conforme { border-top-color: #10B981; }
+.card-indicador.alerta { border-top-color: #EF4444; }
+
+.card-indicador h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--cinza-texto);
+    margin-bottom: 8px;
+}
+
+.card-indicador p {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.card-grafico {
+    background: var(--branco);
+    padding: 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--sombreado);
+}
+
+.card-grafico h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.placeholder-grafico {
+    background: var(--fundo-pagina);
+    height: 260px;
+    border: 2px dashed var(--cinza-bordas);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cinza-texto);
+    font-size: 14px;
+}
+
+/* --- INTERFACES: CONFIGURAÇÕES DE SIGLAS --- */
+.grid-configuracoes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card-form-config {
+    background: var(--branco);
+    padding: 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--sombreado);
+}
+
+.card-form-config h3 {
+    font-size: 15px;
+    margin-bottom: 16px;
+    color: var(--cinza-texto);
+}
+
+.card-form-config input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--cinza-bordas);
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.btn-salvar-mini {
+    padding: 8px 16px;
+    background: var(--primaria);
+    color: var(--branco);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* --- INTERFACES: CADASTRO DE PONTOS --- */
+.bloco-cadastro-ponto {
+    background: var(--branco);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--sombreado);
+}
+
+.linha-inputs {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 16px;
+}
+
+.grupo-input {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.grupo-input label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.grupo-input input, .grupo-input select, .grupo-input textarea {
+    padding: 10px 14px;
+    border: 1.5px solid var(--cinza-bordas);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-principal-admin {
+    padding: 14px;
+    background: var(--primaria);
+    color: var(--branco);
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.btn-principal-admin:hover {
+    background: var(--secundaria);
+}
+
+/* --- ADIÇÃO: TABELAS DE GERENCIAMENTO E BOTÃO EXCLUIR --- */
+.container-tabela-admin {
+    background: var(--branco);
+    padding: 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--sombreado);
+}
+
+.container-tabela-admin h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: var(--escuro);
+}
+
+.tabela-gerenciamento {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-gerenciamento th, .tabela-gerenciamento td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--cinza-bordas);
+    font-size: 14px;
+}
+
+.tabela-gerenciamento th {
+    background-color: var(--fundo-pagina);
+    font-weight: 600;
+    color: var(--cinza-texto);
+}
+
+.tabela-gerenciamento tr:hover {
+    background-color: rgba(108, 43, 217, 0.02);
+}
+
+.btn-deletar {
+    background-color: #EF4444;
+    color: var(--branco);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: background 0.2s;
+}
+
+.btn-deletar:hover {
+    background-color: #DC2626;
+}

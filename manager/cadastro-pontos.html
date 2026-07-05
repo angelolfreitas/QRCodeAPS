@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLab - Cadastro de Pontos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="manager.css">
+</head>
+<body>
+
+<div class="painel-container">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="logo-icon">⚡</span>
+            <span class="logo-texto">SmartLab</span>
+        </div>
+        <div class="user-info">
+            <p class="user-name">Eng. Administrador</p>
+            <span class="badge-role">Acesso Total</span>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="dashboard.html" class="menu-btn">📊 Dashboard Gerais</a>
+            <a href="configuracoes.html" class="menu-btn">⚙️ Configurações de Siglas</a>
+            <a href="cadastro-pontos.html" class="menu-btn active">📌 Cadastrar Pontos / QR</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="../login/login.html" class="btn-sair">🚪 Sair do Sistema</a>
+        </div>
+    </aside>
+
+    <main class="conteudo-principal">
+        <div class="topo-pagina">
+            <h2>Cadastro de Pontos de Inspeção SPDA</h2>
+            <p>Crie novas entidades físicas e vincule geradores de identificação única por QR Code.</p>
+        </div>
+
+        <div class="bloco-cadastro-ponto">
+            <form id="formCadastroPontoCompleto">
+                <div class="linha-inputs">
+                    <div class="grupo-input">
+                        <label for="pontoSelectCliente">Selecione o Cliente:</label>
+                        <select id="pontoSelectCliente" required>
+                            <option value="" disabled selected>Carregando clientes...</option>
+                        </select>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="pontoSelectResponsavel">Responsável pelo Ponto:</label>
+                        <select id="pontoSelectResponsavel" required>
+                            <option value="" disabled selected>Selecione o responsável</option>
+                        </select>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="pontoArea">Área:</label>
+                        <input type="text" id="pontoArea" placeholder="Ex: Subestação 01" required>
+                    </div>
+                </div>
+
+                <div class="linha-inputs">
+                    <div class="grupo-input">
+                        <label for="pontoLocalizacao">Localização Descritiva:</label>
+                        <input type="text" id="pontoLocalizacao" placeholder="Ex: Próximo ao Tanque 09" required>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="pontoCriticidade">Criticidade:</label>
+                        <select id="pontoCriticidade" required>
+                            <option value="baixa">Baixa</option>
+                            <option value="media">Média</option>
+                            <option value="alta">Alta</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="pontoDescricao">Descrição Detalhada do Ponto:</label>
+                    <textarea id="pontoDescricao" rows="3" placeholder="Insira detalhes construtivos..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-principal-admin">Gerar Ponto e Associar QR Code</button>
+            </form>
+        </div>
+
+        <div class="container-tabela-admin">
+            <h3>Ativos Cadastrados na Planta</h3>
+            <table class="tabela-gerenciamento">
+                <thead>
+                <tr>
+                    <th>Código Identificador</th>
+                    <th>Localização</th>
+                    <th>Criticidade</th>
+                    <th style="text-align: center; width: 120px;">Ações</th>
+                </tr>
+                </thead>
+                <tbody id="lista-pontos-ativos">
+                <!-- Injeção via JS -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<script src="../config.js"></script>
+<script src="cadastro-pontos.js"></script>
+</body>
+</html>

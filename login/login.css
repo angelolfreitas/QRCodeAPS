@@ -1,0 +1,348 @@
+:root {
+    --primaria: #6C2BD9;
+    --secundaria: #4A1A9E;
+    --destaque-laranja: #F28705;
+    --escuro: #1E1E2A;
+    --branco: #FFFFFF;
+    --cinza: #F5F5F5;
+    --cinza-bordas: #E0E0E0;
+    --cinza-texto: #666666;
+    --sombreado: 0 2px 16px rgba(0, 0, 0, 0.06);
+    --radius: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cinza);
+}
+
+.login {
+    display: flex;
+    width: 880px;
+    max-width: 94%;
+    background: var(--branco);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--sombreado);
+    min-height: 460px;
+}
+
+.login-esq {
+    flex: 1;
+    background: var(--escuro);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--branco);
+    min-height: 420px;
+}
+
+.login-esq .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 20px;
+    background: var(--destaque-laranja);
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: var(--escuro);
+    font-weight: bold;
+}
+
+.logo-texto {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.login-esq h2 {
+    font-size: 22px;
+    opacity: 0.9;
+    margin-bottom: 6px;
+}
+
+.texto-logo {
+    font-size: 13px;
+    font-weight: 400;
+    color: #A0A0B0;
+}
+
+.login-esq .footer {
+    margin-top: 30px;
+    font-size: 11px;
+    opacity: 0.4;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 14px;
+}
+
+/* --- LADO DIREITO (FORMULÁRIO) --- */
+.login-dir {
+    flex: 1;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 420px;
+}
+
+.login-dir .cabecalho {
+    margin-bottom: 24px;
+}
+
+.login-dir .cabecalho h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--escuro);
+    margin-bottom: 4px;
+}
+
+.login-dir .cabecalho p {
+    font-size: 13px;
+    color: var(--cinza-texto);
+}
+
+.login-dir .campos {
+    margin-bottom: 14px;
+}
+
+.login-dir .campos label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--escuro);
+    margin-bottom: 4px;
+}
+
+.login-dir .campos input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--cinza-bordas);
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    transition: 0.2s;
+    background: var(--cinza);
+}
+
+.login-dir .campos input:focus {
+    outline: none;
+    border-color: var(--primaria);
+    background: var(--branco);
+}
+
+.login-dir .campos .msg {
+    display: block;
+    font-size: 11px;
+    color: var(--cinza-texto);
+    margin-top: 3px;
+}
+
+.login-dir .camp-senha {
+    position: relative;
+}
+
+.login-dir .camp-senha input {
+    padding-right: 40px;
+}
+
+.login-dir .camp-senha .alternar {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--cinza-texto);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.login-dir .camp-senha .alternar:hover {
+    color: var(--escuro);
+}
+
+.login-dir .opcoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 18px;
+}
+
+.login-dir .opcoes label {
+    font-size: 12px;
+    color: var(--cinza-texto);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.login-dir .opcoes label input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: var(--primaria);
+}
+
+.login-dir .opcoes a {
+    font-size: 12px;
+    color: var(--primaria);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.login-dir .opcoes a:hover {
+    text-decoration: underline;
+}
+
+/* Corrigido: .oerfil-sele alterado para bater com o HTML */
+.login-dir .perfil-sele {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--escuro);
+    margin-bottom: 8px;
+}
+
+.login-dir .perfis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.login-dir .perfis .perfil-3 {
+    cursor: pointer;
+    text-align: center;
+    padding: 10px 4px;
+    border: 1.5px solid var(--cinza-bordas);
+    border-radius: var(--radius);
+    background: var(--cinza);
+    transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-dir .perfis .perfil-3:hover {
+    border-color: var(--primaria);
+}
+
+.login-dir .perfis .perfil-ativo {
+    border-color: var(--primaria);
+    background: #F5F0FF;
+}
+
+.login-dir .perfis .nome {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--escuro);
+}
+
+.login-dir .btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primaria);
+    color: var(--branco);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.login-dir .btn:hover {
+    background: var(--secundaria);
+}
+
+.login-dir .footer-fim {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--cinza-texto);
+}
+
+.login-dir .footer-fim a {
+    color: var(--primaria);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-dir .footer-fim a:hover {
+    text-decoration: underline;
+}
+
+/* --- REVISADO: RESPONSIVIDADE COMPLETA --- */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+        padding: 20px 0;
+        overflow-y: auto;
+    }
+
+    .login {
+        flex-direction: column;
+        width: 100%;
+        max-width: 440px;
+        min-height: auto;
+    }
+
+    .login-esq {
+        padding: 32px 24px;
+        min-height: auto;
+        text-align: center;
+        align-items: center;
+    }
+
+    .login-esq .logo {
+        justify-content: center;
+    }
+
+    .login-esq .footer {
+        display: none;
+    }
+
+    .login-dir {
+        padding: 32px 24px;
+        min-height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-dir .perfis {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .login-dir .opcoes {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}

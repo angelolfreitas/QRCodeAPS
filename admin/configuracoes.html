@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLab - Configurações</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="painel-container">
+        <!-- MENU LATERAL FIXO -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-texto">SmartLab</span>
+            </div>
+            <div class="user-info">
+                <p class="user-name">Eng. Administrador</p>
+                <span class="badge-role">Acesso Total</span>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-btn">📊 Dashboard Gerais</a>
+                <a href="configuracoes.html" class="menu-btn active">⚙️ Configurações de Siglas</a>
+                <a href="cadastro-pontos.html" class="menu-btn">📌 Cadastrar Pontos / QR</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../login/login.html" class="btn-sair">🚪 Sair do Sistema</a>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO EXCLUSIVO DE CONFIGURAÇÕES -->
+        <main class="conteudo-principal">
+            <div class="topo-pagina">
+                <h2>Configurações Globais do Sistema</h2>
+                <p>Cadastre e gerencie os parâmetros e siglas que estruturam os códigos de rastreabilidade.</p>
+            </div>
+
+            <div class="grid-configuracoes">
+                <!-- CLIENTES -->
+                <div class="card-form-config">
+                    <h3>Cadastrar Cliente / Empresa</h3>
+                    <form id="formConfigCliente">
+                        <input type="text" id="cfgNomeCliente" placeholder="Nome do Cliente (Ex: Raízen)" required>
+                        <input type="text" id="cfgSiglaCliente" placeholder="Sigla (Ex: RZ)" required maxlength="5">
+                        <button type="submit" class="btn-salvar-mini">Adicionar</button>
+                    </form>
+                    <table class="tabela-gerenciamento" style="margin-top: 20px;">
+                        <thead>
+                            <tr><th>Clientes</th><th style="text-align:right;">Ações</th></tr>
+                        </thead>
+                        <tbody id="lista-clientes">
+                            <!-- Injeção via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ÁREAS -->
+                <div class="card-form-config">
+                    <h3>Cadastrar Área da Planta</h3>
+                    <form id="formConfigArea">
+                        <input type="text" id="cfgNomeArea" placeholder="Nome da Área (Ex: Tanques)" required>
+                        <input type="text" id="cfgSiglaArea" placeholder="Sigla (Ex: TQ)" required maxlength="5">
+                        <button type="submit" class="btn-salvar-mini">Adicionar</button>
+                    </form>
+                    <table class="tabela-gerenciamento" style="margin-top: 20px;">
+                        <thead>
+                            <tr><th>Áreas</th><th style="text-align:right;">Ações</th></tr>
+                        </thead>
+                        <tbody id="lista-areas">
+                            <!-- Injeção via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- TIPOS -->
+                <div class="card-form-config">
+                    <h3>Cadastrar Tipo de Ponto SPDA</h3>
+                    <form id="formConfigTipo">
+                        <input type="text" id="cfgNomeTipo" placeholder="Nome (Ex: Caixa de Inspeção)" required>
+                        <input type="text" id="cfgSiglaTipo" placeholder="Sigla (Ex: CI)" required maxlength="6">
+                        <button type="submit" class="btn-salvar-mini">Adicionar</button>
+                    </form>
+                    <table class="tabela-gerenciamento" style="margin-top: 20px;">
+                        <thead>
+                            <tr><th>Tipos</th><th style="text-align:right;">Ações</th></tr>
+                        </thead>
+                        <tbody id="lista-tipos">
+                            <!-- Injeção via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../config.js"></script>
+    <script src="configuracoes.js"></script>
+</body>
+</html>
