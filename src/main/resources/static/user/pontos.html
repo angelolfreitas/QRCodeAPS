@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLab - Pontos de Inspeção</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../admin/admin.css">
+</head>
+<body>
+
+<div class="painel-container">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="logo-icon">⚡</span>
+            <span class="logo-texto">SmartLab</span>
+        </div>
+        <div class="user-info">
+            <p class="user-name" id="nomeInspetor">Inspetor</p>
+            <span class="badge-role">Operacional</span>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="pontos.html" class="menu-btn active">📌 Pontos Cadastrados</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="../login/login.html" class="btn-sair">🚪 Sair</a>
+        </div>
+    </aside>
+
+    <main class="conteudo-principal">
+        <div class="topo-pagina">
+            <h2>Pontos de Inspeção Disponíveis</h2>
+            <p>Selecione um ponto ativo na planta para realizar a inspeção técnica ou conferir o histórico.</p>
+        </div>
+
+        <div class="container-tabela-admin">
+            <h3>Ativos na Planta</h3>
+            <table class="tabela-gerenciamento">
+                <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Localização</th>
+                    <th>Criticidade</th>
+                    <th style="text-align: center; width: 150px;">Ações</th>
+                </tr>
+                </thead>
+                <tbody id="lista-pontos-inspetor">
+                <tr>
+                    <td colspan="4" style="text-align:center; color:#888;">Carregando pontos...</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="pontos.js"></script>
+</body>
+</html>

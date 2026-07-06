@@ -1,0 +1,219 @@
+:root {
+    --primaria: #6C2BD9;
+    --secundaria: #4A1A9E;
+    --destaque-laranja: #F28705;
+    --escuro: #1E1E2A;
+    --branco: #FFFFFF;
+    --cinza: #F8F9FA;
+    --cinza-bordas: #E0E0E0;
+    --cinza-texto: #666666;
+    --cinza-claro-texto: #A0A0B0;
+    --sombreado: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --radius: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: var(--branco);
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* --- SEÇÃO ESQUERDA (INDUSTRIAL / INTRO) --- */
+#sectionEsquerda {
+    flex: 1.2;
+    background: linear-gradient(135deg, #1E1E2A 0%, #11111A 100%);
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: var(--branco);
+    position: relative;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 24px;
+    background: var(--destaque-laranja);
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: var(--escuro);
+    font-weight: bold;
+}
+
+.logo-texto {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.conteudo-boas-vindas h1 {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    max-width: 500px;
+}
+
+.conteudo-boas-vindas p {
+    font-size: 16px;
+    color: var(--cinza-claro-texto);
+    line-height: 1.6;
+    max-width: 450px;
+}
+
+.badge-disciplina {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: var(--destaque-laranja);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 500;
+}
+
+/* --- SEÇÃO DIREITA (AÇÕES) --- */
+#sectionDireita {
+    flex: 1;
+    background: var(--cinza);
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-header h2 {
+    font-size: 28px;
+    color: var(--escuro);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    font-size: 14px;
+    color: var(--cinza-texto);
+}
+
+.botoes-container {
+    width: 100%;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.link-botao {
+    text-decoration: none;
+    width: 100%;
+}
+
+#sectionDireita button {
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--sombreado);
+}
+
+#botaoLogin {
+    background: var(--primaria);
+    color: var(--white, var(--branco));
+    border: none;
+}
+
+#botaoLogin:hover {
+    background: var(--secundaria);
+    transform: translateY(-2px);
+}
+
+#botaoCadastrar {
+    background: transparent;
+    color: var(--primaria);
+    border: 2px solid var(--primaria);
+}
+
+#botaoCadastrar:hover {
+    background: rgba(108, 43, 217, 0.05);
+    transform: translateY(-2px);
+}
+
+/* --- ADICIONADO: RESPONSIVIDADE FILTRADA --- */
+@media (max-width: 900px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+    }
+
+    .container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    #sectionEsquerda {
+        flex: none;
+        width: 100%;
+        min-height: 40vh;
+        padding: 40px 24px;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .conteudo-boas-vindas h1 {
+        font-size: 28px;
+    }
+
+    .conteudo-boas-vindas p {
+        font-size: 14px;
+    }
+
+    .badge-disciplina {
+        display: none;
+    }
+
+    #sectionDireita {
+        flex: none;
+        width: 100%;
+        min-height: 60vh;
+        padding: 40px 24px;
+        justify-content: center;
+    }
+    
+    .form-header {
+        margin-bottom: 24px;
+    }
+}

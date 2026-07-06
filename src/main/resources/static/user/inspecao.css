@@ -1,0 +1,310 @@
+:root {
+    --primaria: #6C2BD9;
+    --secundaria: #4A1A9E;
+    --destaque-laranja: #F28705;
+    --escuro: #1E1E2A;
+    --branco: #FFFFFF;
+    --cinza-fundo: #F3F4F6;
+    --cinza-card: #FFFFFF;
+    --cinza-bordas: #E5E7EB;
+    --cinza-texto: #4B5563;
+    --radius: 12px;
+    --sombreado: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #E5E7EB; /* Fundo ligeiramente mais escuro para destacar o app no PC */
+    color: var(--escuro);
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centraliza verticalmente em telas grandes */
+    min-height: 100vh;
+}
+
+/* Container principal ajustado para telas grandes e celulares */
+.app-container {
+    width: 100%;
+    max-width: 480px; /* Limita a largura no PC para simular um celular */
+    background: var(--cinza-fundo);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Header superior */
+.app-header {
+    background: var(--escuro);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--branco);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo-min {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.badge-perfil {
+    font-size: 11px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--destaque-laranja);
+    font-weight: 600;
+}
+
+.app-content {
+    padding: 16px;
+    flex: 1;
+}
+
+/* Cards principais das telas */
+.card-inspecao {
+    background: var(--cinza-card);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--sombreado);
+    margin-bottom: 20px;
+}
+
+/* Header do Ponto */
+.ponto-header {
+    border-bottom: 1px solid var(--cinza-bordas);
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+}
+
+.criticidade {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.criticidade.alta {
+    background: #FEE2E2;
+    color: #EF4444;
+}
+
+.ponto-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--escuro);
+}
+
+.sub-status {
+    font-size: 13px;
+    color: var(--cinza-texto);
+    margin-top: 4px;
+}
+
+/* Detalhes Técnicos */
+.detalhes-grupo h3, .historico-grupo h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--cinza-texto);
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.grid-detalhes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #F9FAFB;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.item-detalhe {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-detalhe strong {
+    color: var(--cinza-texto);
+}
+
+.descricao-ponto {
+    font-size: 13px;
+    margin-top: 10px;
+    line-height: 1.5;
+    color: var(--cinza-texto);
+}
+
+/* Histórico / Linha do Tempo */
+.historico-grupo {
+    margin-top: 20px;
+    margin-bottom: 24px;
+}
+
+.card-historico {
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid #10B981;
+    background: #F0FDF4;
+    font-size: 13px;
+}
+
+.hist-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.badge-status.ok {
+    color: #10B981;
+    font-weight: 700;
+}
+
+.msg-vazio {
+    font-size: 13px;
+    color: var(--cinza-texto);
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Botões Globais */
+.btn-principal {
+    width: 100%;
+    padding: 14px;
+    background: var(--primaria);
+    color: var(--branco);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: center;
+}
+
+.btn-principal:hover {
+    background: var(--secundaria);
+}
+
+.btn-principal.salvar {
+    background: #10B981;
+    margin-top: 10px;
+}
+
+.btn-principal.salvar:hover {
+    background: #059669;
+}
+
+/* Formulário de Input */
+.form-header-voltar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--cinza-bordas);
+    padding-bottom: 14px;
+}
+
+.btn-voltar {
+    background: none;
+    border: none;
+    color: var(--primaria);
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.campo-grupo label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--escuro);
+}
+
+.campo-grupo input, .campo-grupo select, .campo-grupo textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid var(--cinza-bordas);
+    border-radius: 8px;
+    background: #F9FAFB;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
+.campo-grupo input:focus, .campo-grupo select:focus, .campo-grupo textarea:focus {
+    outline: none;
+    border-color: var(--primaria);
+    background: var(--branco);
+}
+
+.campo-grupo-row {
+    display: flex;
+    gap: 12px;
+}
+
+.campo-grupo-row .campo-grupo {
+    flex: 1;
+}
+
+.checkboxes {
+    padding: 6px 0 14px;
+    justify-content: space-between;
+}
+
+.chk-label {
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.chk-label input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primaria);
+}
+
+.input-file {
+    padding: 8px !important;
+    background: transparent !important;
+    border: 1.5px dashed var(--cinza-bordas) !important;
+}
+
+/* Responsividade para telas muito pequenas */
+@media (max-width: 480px) {
+    .app-content {
+        padding: 12px;
+    }
+    .card-inspecao {
+        padding: 16px;
+    }
+    .campo-grupo-row.checkboxes {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

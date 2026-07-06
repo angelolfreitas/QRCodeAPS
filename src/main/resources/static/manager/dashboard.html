@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLab - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="manager.css">
+</head>
+<body>
+
+    <div class="painel-container">
+        <!-- MENU LATERAL FIXO -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-texto">SmartLab</span>
+            </div>
+            <div class="user-info">
+                <p class="user-name">Supervisor</p>
+                <span class="badge-role">Autoridades Superiores</span>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-btn active">📊 Dashboard Gerais</a>
+                <a href="cadastro-pontos.html" class="menu-btn">📌 Cadastrar Pontos / QR</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../login/login.html" class="btn-sair">🚪 Sair do Sistema</a>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO EXCLUSIVO DO DASHBOARD -->
+        <main class="conteudo-principal">
+            <div class="topo-pagina">
+                <h2>Dashboard de Monitoramento Industrial</h2>
+                <p>Indicadores gerais de conformidade e análise de dados da planta.</p>
+            </div>
+
+            <div class="grid-indicadores">
+                <div class="card-indicador">
+                    <h4>Pontos Cadastrados</h4>
+                    <p id="ind-cadastrados">...</p>
+                </div>
+                <div class="card-indicador conforme">
+                    <h4>Pontos Conformados</h4>
+                    <p id="ind-conformes">...</p>
+                </div>
+                <div class="card-indicador alerta">
+                    <h4>Não Conformidades</h4>
+                    <p id="ind-nao-conformes">...</p>
+                </div>
+            </div>
+
+            <div class="card-grafico">
+                <h3>Análise Temporal e Tendência de Medições (Resistência / Continuidade)</h3>
+                <div class="placeholder-grafico">
+                    <canvas id="graficoConformidade" width="400" height="220"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - SPDA SmartLab</title>
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+<div class="container">
+    <header id="headerCadastro"><h2>Criar Nova Conta</h2></header>
+
+    <form id="form-cadastro">
+
+        <input type="text" id="nome-cadastro" placeholder="Nome Completo" required>
+        <input type="email" id="email-cadastro" placeholder="E-mail" required>
+
+        <div class="camp-senha" style="position: relative;">
+            <input type="password" id="senha-cadastro" placeholder="Senha" required style="width: 100%;">
+            <button type="button" class="alternar" id="alternar-mostrar" style="position: absolute; right: 10px; top: 10px; background: none; border: none; cursor: pointer;">
+                <i class="fa fa-eye" id="icone-olho"></i>
+            </button>
+        </div>
+
+        <input type="text" id="equipe-cadastro" placeholder="Sua Equipe ou Empresa (Ex: Equipe 01)" required>
+
+        <div id="bloco-crea" style="width: 100%;">
+            <label for="crea-cadastro" style="font-size: 0.85em; color: #666; display: block; margin-bottom: 4px;">Registro Profissional:</label>
+            <input type="text" id="crea-cadastro" placeholder="Digite seu CREA / CFT" required>
+        </div>
+
+        <button type="submit" id="btn-cadastrar">Cadastrar</button>
+
+    </form>
+    <p style="margin-top: 15px; font-size: 0.9em;">
+        Já possui conta? <a href="../login/login.html" style="color: #4CAF50;">Faça login</a>
+    </p>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="cadastro.js"></script>
+</body>
+</html>
